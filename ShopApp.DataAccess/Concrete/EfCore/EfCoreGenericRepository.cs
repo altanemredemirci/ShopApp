@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.DataAccess.Concrete.EfCore
 {
-    internal class EfCoreGenericRepository<T, TContext> : IRepository<T> where T : class where TContext:DbContext,new()
+    public class EfCoreGenericRepository<T, TContext> : IRepository<T> where T : class where TContext:DbContext,new()
     {
         public void Create(T entity)
         {
