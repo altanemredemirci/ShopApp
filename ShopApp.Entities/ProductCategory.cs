@@ -8,8 +8,6 @@ namespace ShopApp.Entities
 {
     public class ProductCategory
     {
-        public int Id { get; set; }
-
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 

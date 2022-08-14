@@ -15,7 +15,15 @@ namespace ShopApp.DataAccess.Concrete.EfCore
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-9IJKPL9\SQLDERS; Database=ShopApp; uid=sa;pwd=1");
         }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductCategory>()
+                 .HasKey(c => new { c.CategoryId, c.ProductId });
+        }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
