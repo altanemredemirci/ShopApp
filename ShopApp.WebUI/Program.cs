@@ -3,6 +3,7 @@ using ShopApp.Business.Concrete;
 using ShopApp.DataAccess.Abstract;
 using ShopApp.DataAccess.Concrete.EfCore;
 using ShopApp.DataAccess.Concrete.Memory;
+using ShopApp.WebUI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +39,7 @@ else
     SeedDatabase.Seed();
 }
 app.UseStaticFiles();
+app.CustomStaticFiles(); //middleWare: Bootstrap kütüphanesini npm ile indirilecek ve nodemodules içerisindeki static dosyalarý ile dýþarýya açma iþlemidir.
 
 app.UseRouting();
 
