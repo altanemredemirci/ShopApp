@@ -39,14 +39,14 @@ namespace ShopApp.Business.Concrete
             return _productDal.GetById(Id);
         }
 
-        public List<Product> GetPopularProducts()
-        {
-            return _productDal.GetAll();
-        }
-
         public Product GetProductDetails(int Id)
         {
             return _productDal.GetProductDetails(Id);
+        }
+
+        public List<Product> GetProductsByCategory(string category,int page,int pageSize)
+        {
+            return _productDal.GetProductsByCategory(category,page,pageSize);
         }
 
         public void Update(Product entity)

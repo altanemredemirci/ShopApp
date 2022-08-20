@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.DataAccess.Concrete.Memory
 {
-    public class MemoryProductDal : IProductDal
+    public class MemoryProductDal //: IProductDal
     {
         public void Create(Product entity)
         {
