@@ -17,6 +17,8 @@ builder.Services.AddRazorPages();
 //Dependency Injection: Baðýmlýlýk yönetimi
 builder.Services.AddScoped<IProductDal, EfCoreProductDal>();
 builder.Services.AddScoped<IProductService, ProductManager>();
+builder.Services.AddScoped<ICategoryDal, EfCoreCategoryDal>();
+builder.Services.AddScoped<ICategoryService, CategoryManager> ();
 
 
 

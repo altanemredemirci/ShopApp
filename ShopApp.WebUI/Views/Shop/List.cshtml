@@ -1,12 +1,10 @@
 ﻿@model ProductListModel
 
-
 <div class="row">
     <div class="col-md-3">
-     @await Component.InvokeAsync("CategoryList")
+         @await Component.InvokeAsync("CategoryList")
     </div>
-    <div class="col-md-9">
-        <partial name="_slider" />
+    <div class="col-md-9">    
         <div class="row">
             @foreach (var product in Model.Products)
             {
@@ -16,5 +14,4 @@
 
     </div>
 </div>
-
 

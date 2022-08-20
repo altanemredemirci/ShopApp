@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.DataAccess.Abstract
 {
-    internal interface ICategoryDal:IRepository<Category>
+    public interface ICategoryDal:IRepository<Category>
     {
         
     }

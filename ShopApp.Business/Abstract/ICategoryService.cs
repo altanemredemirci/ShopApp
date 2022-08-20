@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Business.Abstract
 {
-    internal interface ICategoryService
+    public interface ICategoryService
     {        
         List<Category> GetAll();
 

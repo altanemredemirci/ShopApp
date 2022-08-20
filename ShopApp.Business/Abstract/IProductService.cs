@@ -10,6 +10,8 @@ namespace ShopApp.Business.Abstract
     public interface IProductService
     {
         Product GetById(int Id);
+        Product GetProductDetails(int Id);
+        
         List<Product> GetAll();
 
         List<Product> GetPopularProducts();
