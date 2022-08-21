@@ -61,7 +61,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
        name: "adminProducts",
        pattern: "admin/products",
-       defaults: new { controller = "Admin", action = "Index" }
+       defaults: new { controller = "Admin", action = "ProductList" }
        );
 
     endpoints.MapControllerRoute(

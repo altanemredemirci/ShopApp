@@ -8,13 +8,15 @@ namespace ShopApp.WebUI.Controllers
     public class AdminController : Controller
     {
         private IProductService _productService;
+        private ICategoryService _categoryService;
 
-        public AdminController(IProductService productService)
+        public AdminController(IProductService productService,ICategoryService categoryService)
         {
             _productService = productService;
+            _categoryService = categoryService;
         }
         [Route("admin/products")]
-        public IActionResult Index()
+        public IActionResult ProductList()
         {
             return View(new ProductListModel()
             {
@@ -97,6 +99,14 @@ namespace ShopApp.WebUI.Controllers
         }
 
 
+        public IActionResult CategoryList()
+        {
+            return View(new CategoryListModel()
+            {
+                Categories=_categoryService.GetAll()                
+            });
+        }
+
         public IActionResult CreateCategory()
         {
             return View();
@@ -104,6 +114,23 @@ namespace ShopApp.WebUI.Controllers
 
         [HttpPost]
         public IActionResult CreateCategory(Category entity)
+        {
+            return View();
+        }
+
+        public IActionResult EditCategory(int? Id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EditCategory(Category entity)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCategory(int categoryId)
         {
             return View();
         }
