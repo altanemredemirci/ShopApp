@@ -14,11 +14,19 @@ namespace ShopApp.WebUI.Controllers
         }
 
         //products/telefon?page=2
+        [Route("products/{category?}")]
         public IActionResult List(string category, int page = 1)
         {
             const int pageSize = 3;
             return View(new ProductListModel()
             {
+                PageInfo = new PageInfo()
+                {
+                    TotalItems=_productService.GetCountByCategory(category),
+                    CurrentPage=page,
+                    ItemsPerPage=pageSize,
+                    CurrentCategory=category
+                },
                 Products = _productService.GetProductsByCategory(category,page,pageSize)
             });
         }
