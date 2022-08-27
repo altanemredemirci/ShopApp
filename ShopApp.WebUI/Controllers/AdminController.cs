@@ -130,7 +130,7 @@ namespace ShopApp.WebUI.Controllers
             {
                 return NotFound();
             }
-            Category cat = _categoryService.GetById(Id.Value);
+            var cat = _categoryService.GetByIdWithProducts(Id.Value);
             if (cat == null)
             {
                 return NotFound();
@@ -138,7 +138,8 @@ namespace ShopApp.WebUI.Controllers
             return View(new CategoryModel()
             {
                 Id = cat.Id,
-                Name = cat.Name
+                Name = cat.Name,
+                Products=cat.ProductCategories.Select(p=>p.Product).ToList()
             });
         }
 
@@ -166,6 +167,14 @@ namespace ShopApp.WebUI.Controllers
                 _categoryService.Delete(entity);
             }
             return RedirectToAction("CategoryList");
+        }
+
+
+        [HttpPost]
+        public IActionResult DeleteFromCategory(int categoryId, int productId)
+        {
+            _categoryService.DeleteFromCategory(categoryId, productId);
+            return Redirect("/admin/categories/" + categoryId);
         }
     }
 }

@@ -26,6 +26,11 @@ namespace ShopApp.Business.Concrete
             _categoryDal.Delete(entity);
         }
 
+        public void DeleteFromCategory(int categoryId, int productId)
+        {
+            _categoryDal.DeleteFromCategory(categoryId, productId);
+        }
+
         public List<Category> GetAll()
         {
             return _categoryDal.GetAll();
@@ -34,6 +39,11 @@ namespace ShopApp.Business.Concrete
         public Category GetById(int Id)
         {
             return _categoryDal.GetById(Id);
+        }
+
+        public Category GetByIdWithProducts(int id)
+        {
+            return _categoryDal.GetByIdWithProducts(id);
         }
 
         public void Update(Category entity)
