@@ -14,5 +14,6 @@ namespace ShopApp.Business.Abstract
         void Create(Category entity);
         void Update(Category entity);
         void Delete(Category entity);
+        Category GetById(int Id);
     }
 }
