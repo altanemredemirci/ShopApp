@@ -69,7 +69,7 @@ namespace ShopApp.WebUI.Controllers
 
         [HttpPost]
         [Route("admin/products/{id?}")]
-        public IActionResult EditProduct(ProductModel model)
+        public IActionResult EditProduct(ProductModel model,int[] categoryIds)
         {
             var entity = _productService.GetById(model.Id);
 
@@ -84,7 +84,7 @@ namespace ShopApp.WebUI.Controllers
             entity.ImageUrl = model.ImageUrl;
 
 
-            _productService.Update(entity);
+            _productService.Update(entity,categoryIds);
 
             return RedirectToAction("ProductList");
         }
