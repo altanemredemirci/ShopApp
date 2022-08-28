@@ -5,7 +5,13 @@
 @section Scripts{
     <script src="~/modules/jquery-validation/dist/jquery-validation.min.js"></script>
     <script src="~/modules/jquery-validation-unobtrusive/dist/jquery-validation-unobtrusive.min.js"></script>
+    <script src="~/modules/ckeditor/ckeditor.js"></script>
+
+    <script>
+    CKEDITOR.replace("editor")
+    </script>
 }
+
 <script type="text/javascript">
 $(document).ready(function(){
     $("#fileImage").change(function(e){
