@@ -30,18 +30,33 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProduct(ProductModel model)
+        public async Task<IActionResult> CreateProduct(ProductModel model, IFormFile file)
         {
-            var entity = new Product()
+            ModelState.Remove("SelectedCategories");
+            if (ModelState.IsValid)
             {
-                Name = model.Name,
-                Description = model.Description,
-                Price = model.Price,
-                ImageUrl = model.ImageUrl
-            };
+                var entity = new Product()
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    Price = model.Price                    
+                };
+                if (file != null)
+                {
+                    entity.ImageUrl = file.FileName;
 
-            _productService.Create(entity);
-            return RedirectToAction("ProductList");
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", file.FileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
+
+                _productService.Create(entity);
+                return RedirectToAction("ProductList");
+            }
+
+            return View(model);
         }
 
         [Route("admin/products/{id?}")]
@@ -69,24 +84,40 @@ namespace ShopApp.WebUI.Controllers
 
         [HttpPost]
         [Route("admin/products/{id?}")]
-        public IActionResult EditProduct(ProductModel model,int[] categoryIds)
+        public async Task<IActionResult> EditProduct(ProductModel model,int[] categoryIds, IFormFile file)
         {
-            var entity = _productService.GetById(model.Id);
-
-            if (entity == null)
+            ModelState.Remove("SelectedCategories");
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                var entity = _productService.GetById(model.Id);
+
+                if (entity == null)
+                {
+                    return NotFound();
+                }
+
+                entity.Name = model.Name;
+                entity.Description = model.Description;
+                entity.Price = model.Price;
+
+                if (file != null)
+                {
+                    entity.ImageUrl = file.FileName;
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", file.FileName);
+                    using(var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
+
+
+                _productService.Update(entity, categoryIds);
+
+                return RedirectToAction("ProductList");
             }
-
-            entity.Name = model.Name;
-            entity.Description = model.Description;
-            entity.Price = model.Price;
-            entity.ImageUrl = model.ImageUrl;
-
-
-            _productService.Update(entity,categoryIds);
-
-            return RedirectToAction("ProductList");
+            ViewBag.Categories = _categoryService.GetAll();
+            return View(model);
         }
 
         [HttpPost]

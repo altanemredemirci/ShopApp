@@ -3,27 +3,42 @@
     ViewData["Title"] = "EditProduct";
 }
 
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#fileImage").change(function(e){
+        $("#imgPreview").show();
+        $("#imgPreview").attr('src',URL.createObjectURL(e.target.files[0]))
+    })
+})
+</script>
+
 <h1>EditProduct</h1>
 <hr />
-<form asp-controller="Admin" asp-action="EditProduct" method="post">
+<form asp-controller="Admin" asp-action="EditProduct" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-8">
             <div class="mb-3 col-md-6 offset-md-3">
                 <label asp-for="Name" class="form-label"></label>
                 <input asp-for="Name" class="form-control" placeholder="ProductName">
+                <span asp-validation-for="Name"></span>
             </div>
 
             <div class="mb-3 col-md-6 offset-md-3">
                 <label asp-for="ImageUrl" class="form-label"></label>
-                <input asp-for="ImageUrl" class="form-control" placeholder="ImageUrl">
+                <input type="hidden" name="ImageUrl" value="@Model.ImageUrl" />
+                <img src="~/img/@Model.ImageUrl" width="80" id="imgPreview"/>
+                <input type="file" name="file" value="" id="fileImage"/>
+                 <span asp-validation-for="ImageUrl"></span>
             </div>
             <div class="mb-3 col-md-6 offset-md-3">
                 <label asp-for="Description" class="form-label"></label>
                 <textarea id="editor" class="form-control" asp-for="Description" placeholder="Description"></textarea>
+                 <span asp-validation-for="Description"></span>
             </div>
             <div class="mb-3 col-md-6 offset-md-3">
                 <label asp-for="Price" class="form-label"></label>
                 <input class="form-control" asp-for="Price" placeholder="Price">
+                 <span asp-validation-for="Price"></span>
             </div>
             <div class="mb-3 col-md-6 offset-md-3">
                 <button type="submit" class="btn btn-primary">Save Product</button>
