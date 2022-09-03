@@ -51,7 +51,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie = new CookieBuilder
     {
         HttpOnly = true,                               //Tarayýcýda tutulsun
-        Name = "ShopApp.Security.Cookie"               //Cookie adý
+        Name = "ShopApp.Security.Cookie",              //Cookie adý
+        SameSite = SameSiteMode.Strict                 //Cookie bizim tarayýcý tarafýndan server tarafýna taþýnýr.
     };
 });
 
