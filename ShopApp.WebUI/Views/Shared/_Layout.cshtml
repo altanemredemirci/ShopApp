@@ -17,6 +17,12 @@
 <body>   
     <partial name="_navbar"></partial>
     <div class="container pt-100">
+
+        @if(TempData["message"] != null)
+        {
+            <partial name="_resultmessage" model="@(TempData.Get<ResultMessage>("message"))"> </partial>
+        }
+
            @RenderBody()
     </div>
  
