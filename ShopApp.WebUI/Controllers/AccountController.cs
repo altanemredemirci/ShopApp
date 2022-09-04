@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ShopApp.WebUI.EmailServices;
 using ShopApp.WebUI.Identity;
 using ShopApp.WebUI.Models;
 
@@ -49,6 +50,11 @@ namespace ShopApp.WebUI.Controllers
                     token = code
                 });
                 //send email
+                string siteUrl = "http://localhost:5148";
+                string activateUrl = $"{siteUrl}{callbackUrl}";
+
+                EmailSender.Execute("Hesabınızı Onaylayınız.", $"Lütfen email hesabınızı onaylamak için linke <a href='{activateUrl}' target='_blank'> tıklayınız</a>..", model.Email).Wait();
+
 
                 return RedirectToAction("login", "account");
             }
