@@ -10,14 +10,17 @@ using ShopApp.WebUI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ApplicationIdentityDbContext>(options =>
-options.UseSqlServer(@"Server=DESKTOP-9IJKPL9\SQLDERS; Database=ShopApp; uid=sa;pwd=1"));
+options.UseSqlServer("Server=DESKTOP-9IJKPL9\\SQLDERS; Database=ShopApp; uid=sa;pwd=1"));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
     .AddDefaultTokenProviders();
+
+
 
 
 builder.Services.Configure<IdentityOptions>(options =>
@@ -65,7 +68,6 @@ builder.Services.AddScoped<IProductDal, EfCoreProductDal>();
 builder.Services.AddScoped<IProductService, ProductManager>();
 builder.Services.AddScoped<ICategoryDal, EfCoreCategoryDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager> ();
-
 
 
 

@@ -11,11 +11,14 @@ namespace ShopApp.WebUI.Controllers
     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
+        private RoleManager<IdentityRole> _roleManager;
         private SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
         {
+            SeedIdentity.Seed(userManager, roleManager).Wait();
             _userManager = userManager;
+            _roleManager = roleManager;
             _signInManager = signInManager;
         }
 
