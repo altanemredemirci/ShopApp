@@ -1,0 +1,33 @@
+﻿@model AdminUserModel
+@{
+    ViewData["Title"] = "UserEdit";
+}
+
+<h1>UserEdit</h1>
+<hr />
+<form asp-controller="Admin" asp-action="UserEdit">
+    <div class="row">
+        <div class="col-md-8">
+            <input type="hidden" name="Email" value="@Model.Email" />
+            <div class="mb-3 col-md-6 offset-md-3">
+                <label asp-for="FullName" class="form-label"></label>
+                <input asp-for="FullName" class="form-control" placeholder="FullName">
+                <span asp-validation-for="FullName"></span>
+            </div>
+            <div class="mb-3 col-md-6 offset-md-3">
+                <label asp-for="IsAdmin" class="form-label"></label>
+                 <input type="checkbox" asp-for="IsAdmin" checked=@(Model.IsAdmin==true ? true : false)/>
+                <span asp-validation-for="IsAdmin"></span>
+            </div>
+            <div class="mb-3 col-md-6 offset-md-3">
+                <label asp-for="EmailConfirmed" class="form-label"></label>
+                <input type="checkbox"  asp-for=EmailConfirmed checked=@(Model.EmailConfirmed==true ? true : false) />
+                <span asp-validation-for="EmailConfirmed"></span>
+            </div>
+            <div class="mb-3 col-md-6 offset-md-3">
+                <button type="submit" class="btn btn-primary">Save User</button>
+            </div>
+        </div>       
+    </div>
+
+</form>
