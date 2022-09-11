@@ -66,8 +66,12 @@ builder.Services.ConfigureApplicationCookie(options =>
 //Dependency Injection: Baðýmlýlýk yönetimi
 builder.Services.AddScoped<IProductDal, EfCoreProductDal>();
 builder.Services.AddScoped<IProductService, ProductManager>();
+
 builder.Services.AddScoped<ICategoryDal, EfCoreCategoryDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager> ();
+
+builder.Services.AddScoped<ICartDal, EfCoreCartDal>();
+builder.Services.AddScoped<ICartService, CartManager>();
 
 
 
@@ -105,6 +109,12 @@ app.UseEndpoints(endpoints =>
         pattern: "products/{category?}",
         defaults: new { controller = "Shop", action = "List" }
         );
+
+    endpoints.MapControllerRoute(
+       name: "cart",
+       pattern: "cart",
+       defaults: new { controller = "Cart", action = "Index" }
+       );
 
     endpoints.MapControllerRoute(
        name: "adminProducts",

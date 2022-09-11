@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ShopApp.Business.Abstract;
 using ShopApp.WebUI.EmailServices;
 using ShopApp.WebUI.Extensions;
 using ShopApp.WebUI.Identity;
@@ -13,13 +14,15 @@ namespace ShopApp.WebUI.Controllers
         private UserManager<ApplicationUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private ICartService _cartService;
 
-        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(ICartService cartService,UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
         {
             SeedIdentity.Seed(userManager, roleManager).Wait();
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _cartService = cartService;
         }
 
         public IActionResult Register()
@@ -153,6 +156,9 @@ namespace ShopApp.WebUI.Controllers
                 var result = await _userManager.ConfirmEmailAsync(user, token);
                 if (result.Succeeded)
                 {
+                    //create cart object Her user email onayı yaptığında ona ait bir cart oluşturulacak.
+                    _cartService.InitializeCart(user.Id);
+
                     TempData.Put("message", new ResultMessage()
                     {
                         Title = "Hesap Onayı",
