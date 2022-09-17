@@ -96,6 +96,7 @@ namespace ShopApp.WebUI.Controllers
         public async Task<IActionResult> EditProduct(ProductModel model,int[] categoryIds, IFormFile file)
         {
             ModelState.Remove("SelectedCategories");
+            ModelState.Remove("file");
             if (ModelState.IsValid)
             {
                 var entity = _productService.GetById(model.Id);

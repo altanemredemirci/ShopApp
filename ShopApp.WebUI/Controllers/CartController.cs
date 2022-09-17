@@ -36,8 +36,23 @@ namespace ShopApp.WebUI.Controllers
                 }).ToList()
             });
         }
+
+
         [HttpPost]
-        public IActionResult AddToCart()
+        public IActionResult AddToCart(int productId, int quantity)
+        {
+            _cartService.AddToCart(_userManager.GetUserId(User), productId, quantity);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteFromCart(int productId)
+        {
+            _cartService.DeleteFromCart(_userManager.GetUserId(User), productId);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Checkout()
         {
             return View();
         }
