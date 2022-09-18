@@ -35,6 +35,11 @@ namespace ShopApp.Entities
 
 
         public List<OrderItem> OrderItems { get; set; }
+
+        public Order()
+        {
+            OrderItems = new List<OrderItem>();
+        }
     }
 
     public enum EnumOrderState

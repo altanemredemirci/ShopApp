@@ -73,7 +73,8 @@ builder.Services.AddScoped<ICategoryService, CategoryManager> ();
 builder.Services.AddScoped<ICartDal, EfCoreCartDal>();
 builder.Services.AddScoped<ICartService, CartManager>();
 
-
+builder.Services.AddScoped<IOrderDal, EfCoreOrderDal>();
+builder.Services.AddScoped<IOrderService, OrderManager>();
 
 
 
@@ -139,6 +140,13 @@ app.UseEndpoints(endpoints =>
       pattern: "admin/categories/{id?}",
       defaults: new { controller = "Admin", action = "EditCategory" }
       );
+
+    endpoints.MapControllerRoute(
+      name: "checkout",
+      pattern: "checkout",
+      defaults: new { controller = "cart", action = "Checkout" }
+      );
+
 });
 
 app.Run();

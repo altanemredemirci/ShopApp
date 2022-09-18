@@ -12,7 +12,7 @@ using ShopApp.DataAccess.Concrete.EfCore;
 namespace ShopApp.DataAccess.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20220917133103_AddingOrderEntities")]
+    [Migration("20220917135055_AddingOrderEntities")]
     partial class AddingOrderEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
